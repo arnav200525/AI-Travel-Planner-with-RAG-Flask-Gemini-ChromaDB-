@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Travel Itinerary</title>
+
+    <style>
+        :root {
+            --primary: #f97316;
+            --primary-light: #fff7ed;
+            --accent: #c2410c;
+            --bg: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background: linear-gradient(135deg, #f1f5f9, #e2e8f0);
+            margin: 0;
+            padding: 20px;
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+        }
+
+        .header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--primary-light);
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 900;
+            margin: 0;
+            letter-spacing: -0.03em;
+        }
+
+        h1 span {
+            color: var(--primary);
+        }
+
+        h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            margin-top: 60px;
+            margin-bottom: 20px;
+        }
+
+        h3::before {
+            content: "";
+            width: 4px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* ===== TABLE DESIGN ===== */
+
+        .table-wrapper {
+            overflow-x: auto;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            min-width: 850px;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        th {
+            background: linear-gradient(to right, var(--primary-light), #fff);
+            color: var(--accent);
+            text-align: left;
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 12px;
+            letter-spacing: 0.05em;
+            padding: 18px;
+            border-bottom: 2px solid var(--border);
+        }
+
+        td {
+            padding: 18px;
+            font-size: 14px;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tbody tr {
+            transition: all 0.25s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--primary-light);
+            transform: scale(1.01);
+        }
+
+        tbody tr:hover td {
+            color: var(--text-main);
+        }
+
+        /* Day Badge */
+        .day-badge {
+            background: none;
+            color: var(--text-main);
+            padding: 0;
+            border-radius: 0;
+            font-weight: 600;
+            font-size: 14px;
+            box-shadow: none;
+        }
+
+        /* Price Tag */
+        .price-tag {
+            background: #ecfdf5;
+            color: #059669;
+            padding: 6px 12px;
+            border-radius: 14px;
+            font-weight: 700;
+            font-size: 13px;
+        }
+
+        /* ===== GRID CARDS ===== */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .card-item {
+            background: white;
+            border: 1px solid var(--border);
+            padding: 22px;
+            border-radius: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .card-item:hover {
+            border-color: var(--primary);
+            transform: translateY(-6px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-item strong {
+            display: block;
+            font-size: 18px;
+            color: var(--primary);
+            margin-bottom: 8px;
+        }
+
+        /* ===== BUTTON ===== */
+
+        .btn-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .btn-pdf {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            color: white;
+            padding: 16px 34px;
+            border-radius: 16px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 16px;
+            transition: all 0.25s ease;
+            box-shadow: 0 10px 20px rgba(249, 115, 22, 0.3);
+        }
+
+        .btn-pdf:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(249, 115, 22, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+                margin: 10px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header-area">
+            <h1>✨ Travel <span>Itinerary</span></h1>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Location</th>
+                        <th>Morning</th>
+                        <th>Afternoon</th>
+                        <th>Evening</th>
+                        <th>Stay</th>
+                        <th>Expense</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for day in itinerary %}
+                    <tr>
+                        <td><span class="day-badge">{{ day.day }}</span></td>
+                        <td><strong>{{ day.location }}</strong></td>
+                        <td>{{ day.morning }}</td>
+                        <td>{{ day.afternoon }}</td>
+                        <td>{{ day.evening }}</td>
+                        <td>{{ day.stay }}</td>
+                        <td><span class="price-tag">{{ day.expense }}</span></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <h3>Hotel Recommendations</h3>
+        <ul class="grid">
+            {% for hotel in hotels %}
+            <li class="card-item">
+                <strong>🏨 {{ hotel.name }}</strong>
+                <span>{{ hotel.description }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Food Recommendations</h3>
+        <ul class="grid">
+            {% for food in food_places %}
+            <li class="card-item">
+                <strong>🍽️ {{ food.place }}</strong>
+                <span>{{ food.specialty }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+
+        <div class="btn-container">
+            <a href="/download-pdf" class="btn-pdf">
+                Download PDF Itinerary
+            </a>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

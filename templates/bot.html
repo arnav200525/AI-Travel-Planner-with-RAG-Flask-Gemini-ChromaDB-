@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Travel Planner AI – Chat</title>
+    <style>
+        :root {
+    --primary-orange: #f97316;    
+    --secondary-orange: #fff7ed;  
+    --accent-dark: #c2410c;       
+    --bg-gray: #f8fafc;           
+    --white: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border-light: #e2e8f0;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg-gray);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    line-height: 1.5;
+}
+
+.container {
+    max-width: 700px;
+    margin: 50px auto;
+    background: var(--white);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-light);
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.bot {
+    background: var(--secondary-orange);
+    color: var(--accent-dark);
+    padding: 14px 18px;
+    border-radius: 12px 12px 12px 2px;
+    margin-bottom: 15px;
+    max-width: 85%;
+    align-self: flex-start;
+    border: 1px solid #ffedd5;
+    font-size: 15px;
+    position: relative;
+}
+
+.user {
+    background: var(--primary-orange);
+    color: var(--white);
+    padding: 14px 18px;
+    border-radius: 12px 12px 2px 12px;
+    margin-bottom: 15px;
+    max-width: 85%;
+    align-self: flex-end;
+    text-align: left; 
+    font-size: 15px;
+    box-shadow: 0 4px 12px rgba(249, 115, 22, 0.2);
+}
+.chat-input {
+    margin-top: auto;
+    padding-top: 20px;
+    display: flex;
+    gap: 12px;
+    border-top: 1px solid var(--border-light);
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 14px 18px;
+    font-size: 15px;
+    border: 2px solid var(--border-light);
+    border-radius: 10px;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+input[type="text"]:focus {
+    border-color: var(--primary-orange);
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.1);
+}
+
+button {
+    padding: 12px 24px;
+    background: var(--primary-orange);
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background: var(--accent-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(194, 65, 12, 0.3);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+@media (max-width: 600px) {
+    .container {
+        margin: 10px;
+        padding: 20px;
+        width: auto;
+    }
+    
+    .bot, .user {
+        max-width: 90%;
+    }
+}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    {% for msg in chat %}
+        <div class="{{ msg.sender }}">
+            {{ msg.text }}
+        </div>
+    {% endfor %}
+    {% if show_input %}
+    <form method="POST" class="chat-input">
+        <input type="text" name="answer" placeholder="Type your answer..." required autofocus>
+        <button type="submit">Send</button>
+    </form>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
