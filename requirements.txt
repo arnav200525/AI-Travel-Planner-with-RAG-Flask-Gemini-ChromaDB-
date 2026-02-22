@@ -1,0 +1,11 @@
+Flask==3.0.0
+google-generativeai
+langchain-chroma
+langchain-huggingface
+langchain-text-splitters
+chromadb
+sentence-transformers
+reportlab
+requests
+beautifulsoup4
+python-dotenv
